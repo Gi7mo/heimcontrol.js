@@ -13,6 +13,7 @@ define([ 'fs' ], function( fs ) {
   var PluginHelper = function(app) {
     this.app = app;
     this.pluginFolder = app.get('plugin folder');
+    this.pluginList = [];
   };
 
   /**
@@ -48,23 +49,27 @@ define([ 'fs' ], function( fs ) {
    * @param {Object} callback.result An array containing the plugins
    */
   PluginHelper.prototype.getPluginList = function(callback) {
-    var pluginList = [];
     var that = this;
     var files = fs.readdirSync(that.pluginFolder);
 
     function requireRecursive(files) {
       var file = files.pop();
       requirejs([that.pluginFolder + '/' + file + '/index.js'], function(Plugin) {
-        pluginList.push(new Plugin(that.app));
+        that.pluginList.push(new Plugin(that.app));
         if (files.length>0) {
           requireRecursive(files);
         } else {
-          return callback(null, pluginList);
+          return callback(null, that.pluginList);
         }
       });
     }
 
-    requireRecursive(files);
+    if(this.pluginList.length == 0) {
+      requireRecursive(files);
+    } else {
+      return callback(null, this.pluginList);
+    }
+    
   };
 
   var exports = PluginHelper;
