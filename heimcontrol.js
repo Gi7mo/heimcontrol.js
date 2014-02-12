@@ -35,7 +35,7 @@ requirejs([ 'http', 'connect', 'mongodb', 'path', 'express', 'node-conf', 'socke
   // Load database
   var db = new Mongo.Db(config.mongo.name, new Mongo.Server(config.mongo.host, config.mongo.port, config.mongo.user, {
     native_parser: false
-  }));
+  }), {safe: false});
 
   var cookieParser = Express.cookieParser(config.secret);
   var sessionStore = new Connect.middleware.session.MemoryStore();
