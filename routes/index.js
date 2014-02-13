@@ -60,6 +60,13 @@ define([ 'crypto', 'cookie', 'fs' ], function(crypto, cookie, fs) {
   function renderPluginItems(app, type, i, html, callback) {
     var plugins = app.get('plugins');
     var plugin = plugins[i];
+    if(typeof plugin.excludeFromHomeListing != 'undefined' && plugin.excludeFromHomeListing === true) {
+      if (++i < plugins.length) {
+        return renderPluginItems(app, type, i , html, callback);
+      } else {
+        return callback(null, html);
+      }
+    }
     app.get('db').collection(plugin.collection, function(err, collection) {
       if (err) {
         return callback(err);
