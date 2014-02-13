@@ -25,7 +25,6 @@ each item in items
     - if (item.method == 'sensor')
       p.description
         strong #{item.description}&nbsp; 
-        span.muted PIN #{item.pin}
         span.muted PIN #{item.pin} 
         - if (item.graph)
           a.show-graph-overlay.icon-bar-chart(alt="Show Graph", data-url="/api/arduino/get?type=graph&sensor=" + item._id)

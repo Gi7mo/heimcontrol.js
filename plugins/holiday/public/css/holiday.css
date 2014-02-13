@@ -1,0 +1,109 @@
+#inputs {
+	margin-top:30px;
+}
+#map-canvas {
+	width: 400px;
+	height: 400px;
+}
+.plugin-container.actors:after {
+	content: "Actors to switch";
+}
+.plugin-container.location:after {
+	content: "Location";
+}
+#panel {
+	position: relative;
+	top: 55px;
+	left: 90px;
+	z-index: 5;
+}
+#time-slider-container {
+	position: relative;
+	top: 0px;
+	width: 80%;
+}
+#time-scale-container {
+	margin: 0 15px 0 15px;
+	font-size: 0.9em;
+	padding: 0;
+}
+#time-scale {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 100.01%;
+	margin: 0;
+	padding: 0;
+}
+#time-scale td {
+	width: 4.1666666666%;
+	padding-left: 5px;
+	height: 20px;
+	border-left: 1px solid #ccc;
+}
+#time-scale td span {
+	color: #999;
+}
+#time-slider-1 {
+	position:relative;
+	margin: 0px 15px 0;
+	background: #91a1be;
+	height: 12.3px;
+	width: 865px;
+}
+
+#time-slider-2 {
+	position:relative;
+	margin: -14.8px 15px 0;
+	background: #91a1be;
+	height: 12.3px;
+	width: 865px;
+}
+
+#time-scale-sunlight, #time-scale-twilight, #time-scale-sunlight-2, #time-scale-twilight-2 {
+	height: 100%;
+	position: absolute;
+	background: #FFED9E;
+}
+#time-scale-twilight, #time-scale-twilight-2 {
+	background: #c0ddF0;
+}
+
+#time-scale-twilight {
+	left: 32.56944444444444%;
+	right: 5.6666667%;
+}
+#time-scale-twilight-2 {
+	display:none;
+}
+#time-scale-sunlight {
+	left: 35.138888888888886%;
+	right: 8.3055%;
+}
+#time-scale-sunlight-2 {
+	display:none;
+}
+#time-slider-1 .ui-slider-handle {
+	width: 16px;
+	height: 16px;
+	margin-left: -10px;
+	margin-top: 2px;
+	border-radius: 10px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	background: #0f0;
+	border-color: #fdcf94;
+	z-index: 1;
+}
+
+#time-slider-2 .ui-slider-handle {
+	width: 16px;
+	height: 16px;
+	margin-left: -10px;
+	margin-top: 2px;
+	border-radius: 10px;
+	-moz-border-radius: 9px;
+	-webkit-border-radius: 9px;
+	background: #f00;
+	border-color: #fdcf94;
+	z-index: 1;
+}

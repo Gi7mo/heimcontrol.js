@@ -21,5 +21,8 @@
     "wake_on_lan": "= 0.0.3",
     "delivery": "= 0.0.3",
     "duino": "https://github.com/ni-c/duino/tarball/master"
+    "suncalc": "1.2.2",
+    "duino": "https://github.com/ni-c/duino/tarball/master",
+    "cron": "1.0.3"
   }
 }
