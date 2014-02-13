@@ -13,3 +13,12 @@
 .plugin-container.arduino.led:after {
   content: "Arduino LED";
 }
+
+.plugin-container.arduino .btn.active .icon-circle-blank:before {
+	color: #FF0000;
+}
+
+.plugin-container.arduino .btn.active .icon-circle:before {
+	color: #00FF00;
+}
+}
