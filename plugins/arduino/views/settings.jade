@@ -18,7 +18,6 @@ div.container
             label(for="description") Description (optional):
             input(type="text", name="data[#{i}][description]", placeholder="Temperature", value="#{item.description}")
             label(for="pin") Arduino PIN:
-            input.uppercase(type="text", name="data[#{i}][pin]", placeholder="10", maxlength="2", required="1", value="#{item.pin}", pattern="^A[0-9]|[0-9]{2}$")
             input.uppercase(type="text", name="data[#{i}][pin]", placeholder="10", maxlength="2", required="1", value="#{item.pin}", pattern="^A[0-9]|[0-9]{1,2}$")
             div.switch
               label(for="method") Method:
@@ -47,6 +46,8 @@ div.container
                   input(type="text", name="data[#{i}][formula]", placeholder="x*100-3.14", data-required="1", value=(item.formula ? item.formula : ''))
                   label(for="unit") Unit (optional):
                   input(type="text", name="data[#{i}][unit]", placeholder="°F", data-required="0", value=(item.unit ? item.unit : ''))
+                  label(for="graph") Draw Graph:
+                  input(type="checkbox", checked=item.graph, name="data[#{i}][graph]",  data-required="0")
       
                 div.irremote(class=(item.method != 'irremote' ? 'hidden' : ''))
                   label(for="irtype") IR Type:
@@ -86,7 +87,6 @@ div.plugin-container.arduino.settings#template(style="display: none;")
   label(for="description") Description (optional):
   input(type="text", name="data[%i%][description]", placeholder="Temperature")
   label(for="pin") Arduino PIN:
-  input.uppercase(type="text", name="data[%i%][pin]", placeholder="10", maxlength="2", required="1", pattern="^A[0-9]|[0-9]{2}$")
   input.uppercase(type="text", name="data[%i%][pin]", placeholder="10", maxlength="2", required="1", pattern="^A[0-9]|[0-9]{1,2}$")
   div.switch
     label(for="method") Method:
@@ -115,6 +115,8 @@ div.plugin-container.arduino.settings#template(style="display: none;")
         input(type="text", name="data[%i%][formula]", placeholder="x*3.14-100", data-required="1")
         label(for="unit") Unit (optional):
         input(type="text", name="data[%i%][unit]", placeholder="°F", data-required="0")
+        label(for="graph") Draw Graph:
+        input(type="checkbox", checked=false, name="data[%i%][graph]", data-required="0")
       
       div.irremote.hidden
         label(for="irtype") IR Type:

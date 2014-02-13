@@ -2,7 +2,7 @@ require(["jquery", "bootstrap.min", "/socket.io/socket.io.js"], function() {
 
   var socket = io.connect();
 
-  require(["plugins"], function() {
+  require(["plugins", "/js/d3.v3.min.js"], function(p, d3) {
 
     // Delete buttons
     function iDelete() {
@@ -146,6 +146,127 @@ require(["jquery", "bootstrap.min", "/socket.io/socket.io.js"], function() {
           $.cookie("password", null);
         });
       }
+    });
+
+    var $graph_overlay_wrapper;
+    var $graph_overlay_panel;
+
+    function show_graph_overlay(url) {
+        if ( !$graph_overlay_wrapper ) append_graph_overlay();
+        $graph_overlay_panel.html('<p class="icon-spinner icon-spin"></p>');
+        $graph_overlay_wrapper.fadeIn(700);
+        create_overlay_graph(url);
+    }
+
+    function create_overlay_graph(url) {
+      var margin = {top: 20, right: 20, bottom: 30, left: 50},
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+
+      var parseDate = d3.time.format("%a %b %e %Y %X GMT%Z (CET)").parse;
+
+      var x = d3.time.scale()
+          .range([0, width]);
+
+      var y = d3.scale.linear()
+          .range([height, 0]);
+
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom");
+
+      var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient("left");
+
+      var line = d3.svg.line()
+          .interpolate("basis")
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.v); });
+
+      $.get(url, function(data) {
+        $graph_overlay_panel.html('');
+
+        var svg = d3.select("#graph-overlay-panel").append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        $graph_overlay_panel.width(width + (margin.left * 2) + (margin.right * 2));
+        for(var i in data) {
+          data[i].date = new Date(Date.parse(data[i].now));
+        }
+        
+        x.domain([data[0].date, data[data.length - 1].date]);
+        y.domain([0, d3.max(data, function(d) { return d.v; })]);
+
+        svg.append("clipPath")
+            .attr("id", "clip-above")
+          .append("rect")
+            .attr("width", width)
+            .attr("height", y(0));
+
+        svg.append("clipPath")
+            .attr("id", "clip-below")
+          .append("rect")
+            .attr("y", y(0))
+            .attr("width", width)
+            .attr("height", height - y(0));
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+          .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", ".71em")
+            .style("text-anchor", "end")
+            .text("Value");
+
+        svg.selectAll(".line")
+            .data(["above", "below"])
+          .enter().append("path")
+            .attr("class", function(d) { return "line " + d; })
+            .attr("clip-path", function(d) { return "url(#clip-" + d + ")"; })
+            .datum(data)
+            .attr("d", line);
+      });
+    }
+
+    function hide_graph_overlay() {
+        $graph_overlay_wrapper.fadeOut(500);
+    }
+
+    function append_graph_overlay() {
+        $graph_overlay_wrapper = $('<div id="graph-overlay"></div>').appendTo( $('BODY') );
+        $graph_overlay_panel = $('<div id="graph-overlay-panel"></div>').appendTo( $graph_overlay_wrapper );
+
+        attach_graph_overlay_events();
+    }
+
+    function attach_graph_overlay_events() {
+        $(window).keydown(function(e) {
+          if(e.which == 27) {
+            e.stopPropagation();
+            hide_graph_overlay();
+          }
+        });
+        $(window).click(function(e) {
+          hide_graph_overlay();
+        });
+    }
+
+    $(function() {
+        $('A.show-graph-overlay').click( function(e, a) {
+            e.stopPropagation();
+            show_graph_overlay(this.getAttribute('data-url'));
+        });
     });
 
   });

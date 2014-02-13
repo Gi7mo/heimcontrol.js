@@ -93,3 +93,46 @@ input.login {
   font-weight: bold;
 }
 
+a.show-graph-overlay {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#graph-overlay {
+    width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: url('../img/overlay.png') repeat 0 0;
+    display: none;
+    text-align: center;
+}
+
+#graph-overlay-panel {
+    margin: 10% auto 0 auto;
+    width: 350px;
+    background: #FFF;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.line.above {
+  stroke: #f00;
+}

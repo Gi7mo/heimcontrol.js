@@ -15,6 +15,7 @@ define([ 'duino' ], function(duino) {
 
     this.name = 'Arduino';
     this.collection = 'Arduino';
+    this.dataCollection = 'sensor_data';
     this.icon = 'icon-external-link';
 
     this.app = app;
@@ -30,6 +31,8 @@ define([ 'duino' ], function(duino) {
     this.sensors = {};
 
     this.init();
+
+    this.collectedSensorData = {}
 
     var that = this;
 
@@ -252,6 +255,37 @@ define([ 'duino' ], function(duino) {
     });
   };
 
+  Arduino.prototype.api = function(req, res, next) {
+    var that = this;
+    var ObjectID = require('mongodb').ObjectID;
+    if(req.method == 'GET') {
+      if(req.query.type == 'graph') {
+        if(typeof req.query.sensor != 'undefined') {
+          that.app.get('db').collection(that.dataCollection, function(err, collection) {
+            collection.find({"id": new ObjectID(req.query.sensor)}).sort({ms: 1}).limit(60 * 60 * 24).toArray(function(err, items) {
+              if(!err) {
+                for(var i in items) {
+                  items[i].v = parseFloat(items[i].value);
+                }
+                that.beforeRender(items, function() {
+                  res.send(200, items);
+                });
+              } else {
+                res.send(500, '[]');
+              }
+            })
+          });
+        } else {
+          next();
+        }
+      } else {
+        next();
+      }
+    } else {
+      next();
+    }
+  };
+
   /**
    * Initialize the sensors attached to the Arduino
    * 
@@ -267,6 +301,7 @@ define([ 'duino' ], function(duino) {
 
     this.sensors = {};
     return this.app.get('db').collection(that.collection, function(err, collection) {
+    this.app.get('db').collection(that.collection, function(err, collection) {
       collection.find({
         method: 'sensor'
       }).toArray(function(err, result) {
@@ -287,6 +322,45 @@ define([ 'duino' ], function(duino) {
               var val = parseFloat(eval(item.formula.replace('x', +value)));
               item.value = parseFloat(((item.value + val) / 2).toFixed(2));
               that.values[item._id] = item.value;
+
+              if(item.graph) {
+                if(typeof that.collectedSensorData[item._id] == 'undefined') {
+                  that.collectedSensorData[item._id] = [];
+                }
+
+                that.collectedSensorData[item._id].push(item.value);
+                // collect for a howl minute
+                if(that.collectedSensorData[item._id].length >= 120) {
+                   var median = function(ab) {
+                     ab.sort(function(a,b) {return a - b;});
+                     var half = Math.floor(ab.length/2);
+                     if(ab.length % 2) {
+                       return ab[half];
+                     } else {
+                       return (ab[half-1] + ab[half]) / 2.0;
+                     }
+                   };
+
+                   for(var i in that.collectedSensorData[item._id]) {
+                     var tmp = parseFloat(that.collectedSensorData[item._id][i]);
+                     if(!isNaN(tmp)) {
+                       that.collectedSensorData[item._id][i] = tmp;
+                     } else {
+                       delete that.collectedSensorData[item._id][i];
+                     }
+                   }
+                   // use median to flatten peaks
+                   var avg = median(that.collectedSensorData[item._id]).toFixed(2);
+                   that.collectedSensorData[item._id] = [];
+                   that.app.get('db').collection(that.dataCollection).insert({
+                     id: item._id,
+                     now: new Date().toLocaleString(),
+                     value: avg,
+                     ms: new Date().getTime()
+                   });
+                }
+              }
+
               that.app.get('sockets').emit('arduino-sensor', {
                 id: item._id,
                 value: item.value
