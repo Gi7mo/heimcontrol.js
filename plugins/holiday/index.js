@@ -30,6 +30,12 @@ define(['duino', 'cron', 'suncalc'], function(duino, cron, suncalc) {
 		var that = this;
 		var init = arguments.callee;
 
+		// reset all arrays as we recall init() when
+		// something changed in our settings
+		this.activeActorIds = {};
+		this.actors = [];
+		this.sensors = [];
+
 		var arduinoPlugin;
 		this.app.get('plugin helper').getPluginList(function(err, plugins) {
 			for(var i in plugins) {
@@ -135,13 +141,17 @@ define(['duino', 'cron', 'suncalc'], function(duino, cron, suncalc) {
 									that.app.get('db').collection(arduinoPlugin.dataCollection, function(err, sensorCollection) {
 										sensorCollection.find({'id': new ObjectID(result[0].sensor)}).sort({ms: -1}).limit(10).toArray(function(err, items) {
 											if(!err) {
-												logData.data = items;
+												if(that.debug) {
+													logData.data = items;
+												}
 												var total = 0;
 												for(var i in items) {
 													total += parseFloat(items[i].value);
 												}
 												var avg = total / items.length;
-												logData.avg = avg;
+												if(that.debug) {
+													logData.avg = avg;
+												}
 												if(avg <= parseInt(result[0].on)) {
 													if(that.debug) {
 														logData.switchedOn = true;
