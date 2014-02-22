@@ -147,6 +147,7 @@ requirejs([ 'http', 'connect', 'mongodb', 'path', 'express', 'node-conf', 'socke
       app.post('/api/login', Routes.createAuthToken);
 
       app.get('/', Routes.isAuthorized, Routes.index);
+      app.get('/rpi-monitor', Routes.isAuthorized, Routes.RPiMonitor);
 
       app.get('/settings', Routes.isAuthorized, Routes.settings);
       app.post('/settings/password', Routes.isAuthorized, Routes.changePassword);
@@ -162,6 +163,7 @@ requirejs([ 'http', 'connect', 'mongodb', 'path', 'express', 'node-conf', 'socke
       app.get('/logout', Routes.logout);
       
       app.get('/js/plugins.js', Routes.pluginsJs);
+      app.get('/js/plugin.js', Routes.pluginJs);
       app.get('/css/plugins.css', Routes.pluginsCss);
 
       app.get('plugin helper').getPluginList(function(err, plugins) {

@@ -223,6 +223,51 @@ define([ 'crypto', 'cookie', 'fs' ], function(crypto, cookie, fs) {
     }
   };
 
+  Controller.RPiMonitor = function(req, res, next) {
+    var plugins = req.app.get('plugins');
+    var plugin;
+    for(var i in plugins) {
+      if(plugins[i].id == 'rpi-monitor') {
+        plugin = plugins[i];
+        req.app.get('db').collection(plugin.collection, function(err, collection) {
+          collection.find({}).toArray(function(err, items) {
+            function render(items, meta) {
+              var meta = meta || {};
+              req.app.get('jade').renderFile(__dirname + '/../plugins/' + plugin.id + '/views/' + req.query.type + '.jade', {
+                items: items,
+                meta: meta
+              }, function(err, html) {
+                if (!err) {
+                  return res.render('index', {
+                    content: html,
+                    plugin: plugin.id,
+                    title: plugin.name
+                  });
+                } else {
+                  console.log(err);
+                  return res.render(500, '500', {
+                    title: '500 Internal Server Error'
+                  });
+                }
+              });
+            }
+            // If the plugin has a beforeRender() method, call it
+            if (plugin.beforeRender) {
+              plugin.beforeRender(items, function(err, result, meta) {
+                render(result, meta);
+              });
+            } else {
+              render(items);
+            }
+          });
+        });
+      }
+    }
+    if(!plugin) {
+      return Controller.notFound(req, res);
+    }
+  };
+
   /**
    * GET /settings
    * 
@@ -691,6 +736,33 @@ define([ 'crypto', 'cookie', 'fs' ], function(crypto, cookie, fs) {
     } else {
       return res.send(200, '');
     }
+  };
+
+  /**
+   * GET /js/plugin.js
+   * 
+   *
+   * @param {Object} req The request
+   * @param {Object} res The response
+   */
+  Controller.pluginJs = function(req, res) {
+    var fileList = [];
+    req.app.get('plugins').forEach(function(plugin) {
+      if(req.query.plugin == plugin.id) {
+        var filename = __dirname + '/../plugins/' + plugin.id + '/public/js/' + plugin.id + '.' + req.query.file + '.js';
+        fs.exists(filename, function(exists) {
+          if(exists) {
+            fs.readFile(filename, 'utf8', function(err, data) {
+              res.charset = 'utf-8';
+              res.setHeader('Content-Type', 'text/javascript');
+              return res.send(200, data);
+            });
+          } else {
+            return res.send(200, '');
+          }
+        });
+      }
+    });
   };
 
   /**

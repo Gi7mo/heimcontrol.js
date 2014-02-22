@@ -32,6 +32,20 @@ html
                   a(href="/")
                     i.icon-home  
                     | &nbsp;Home
+                li.dropdown(class=(title === 'RPi-Monitor' ? 'active' : ''))                
+                  a.dropdown-toggle(href="#",data-toggle="dropdown",role="button",id="dropdown")
+                    i.icon-desktop  
+                    | &nbsp;RPi-Monitor&nbsp;
+                    b.caret
+                  ul.dropdown-menu(role="menu",aria-labelledby="dropdown")
+                    li
+                      a(href="/rpi-monitor?type=status")
+                        i.icon-ok &nbsp;
+                        | Status
+                    li
+                      a(href="/rpi-monitor?type=statistics")
+                        i.icon-bar-chart &nbsp;
+                        | Statistics
                 li.dropdown(class=(title.indexOf('Settings')!==-1 ? 'active' : ''))                
                   a.dropdown-toggle(href="#",data-toggle="dropdown",role="button",id="dropdown")
                     i.icon-cogs 

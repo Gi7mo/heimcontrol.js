@@ -136,3 +136,7 @@ a.show-graph-overlay {
 .line.above {
   stroke: #f00;
 }
+
+.hide {
+  display:none !important;
+}
