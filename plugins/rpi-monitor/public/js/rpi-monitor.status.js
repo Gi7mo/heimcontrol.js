@@ -22,10 +22,10 @@ require(['jquery'], function() {
 	function RowTemplate(id,image,title) {
 		return ""+
 			"<div class='row'>"+
-			  "<div class='Icon'><img src='"+image+"' alt='"+title+"'></div>"+
-			  "<div class='Title'>"+title+"</div>"+
-			  "<div class='Warning'></div>"+
-			  "<div class='Text' id='Text"+id+"'><b></b></div>"+
+			  "<div class='col-md-1'><div class='Icon'><img src='"+image+"' alt='"+title+"'></div></div>"+
+			  "<div class='col-md-2'><div class='Title'>"+title+"</div>"+
+			  "<div class='Warning'></div></div>"+
+			  "<div class='col-md-9'><div class='Text' id='Text"+id+"'><b></b></div></div>"+
 			"</div>"+
 			"<hr>";
 	}
@@ -87,7 +87,7 @@ require(['jquery'], function() {
 	}
 
 	function ProgressBar(value, max) {
-		return "<div class='progress progress-striped'><div class='bar' style='width: "+((100 * value ) / max)+"%;'></div></div>"
+		return "<div class='progress progress-striped'><div class='progress-bar progress-bar-info' role='progressbar' aria-valuenow='"+((100 * value ) / max)+"' aria-valuemin='0' aria-valuemax='100' style='width: "+((100 * value ) / max)+"%;'></div></div>"
 	}
 
 	var clocksec=0;
