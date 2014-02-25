@@ -48,8 +48,8 @@ require(["jquery", "bootstrap.min", "/socket.io/socket.io.js"], function() {
     $('.socket').bind('click', iSocketButton);
 
     function registerSelectSwitch() {
-      $('.switch').children('select').change(function() {
-        var e = $(this).parent('.switch');
+      $('.switch select').change(function() {
+        var e = $(this).parents('.switch');
         e.find('.switch-container').find('div').addClass('hidden');
         e.find('.switch-container').find('input').val('');
         e.find('.switch-container').find('input').removeAttr('required', '0');

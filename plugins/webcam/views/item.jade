@@ -3,7 +3,7 @@ each item in items
     - if (item.method == 'streamer')
       p
         strong #{item.input}&nbsp;
-        span.muted &nbsp;Webcam
+        span.text-muted &nbsp;Webcam
       div.streamer-img
         img.streamer(src="/img/white.jpg", data-id="#{item._id}.jpg")
     - if (item.method == 'motion')

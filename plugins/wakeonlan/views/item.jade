@@ -1,6 +1,6 @@
 each item in items        
   div.plugin-container.wakeonlan
-    button.btn.btn-large.socket(type="button", data-socket="wakeonlan-wake", data-id="#{item._id}", data-value="1", class=(item.value == '1' ? 'disabled' : ''))
+    button.btn.btn-lg.socket(type="button", data-socket="wakeonlan-wake", data-id="#{item._id}", data-value="1", class=(item.value == '1' ? 'disabled' : ''))
       i.icon-off.icon-large
       - if (typeof(item.description) != 'undefined')
         | #{item.description}
