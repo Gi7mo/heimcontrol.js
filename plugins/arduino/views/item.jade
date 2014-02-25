@@ -6,10 +6,10 @@ each item in items
 				strong #{item.description} 
 			div.btn-group(data-rcswitch="buttons-radio")
 				button.btn.btn-default.btn-lg.socket(type="button", data-socket="arduino-rcswitch", data-value="1", data-id="#{item._id}", class=(item.value == 1 ? 'active' : ''))
-					i.icon-circle
+					i.fa.fa-circle
 					| On
 				button.btn.btn-inverse.btn-lg.socket(type="button", data-socket="arduino-rcswitch", data-value="0", data-id="#{item._id}", class=(item.value == 0 ? 'active' : '')) 
-					i.icon-circle-blank
+					i.fa.fa-circle-o
 					| Off
 		- if (item.method == 'itrcswitch')
 			p.description
@@ -17,17 +17,17 @@ each item in items
 				strong #{item.description} 
 			div.btn-group(data-rcswitch="buttons-radio")
 				button.btn.btn-default.btn-lg.socket(type="button", data-socket="arduino-itrcswitch", data-value="1", data-id="#{item._id}", class=(item.value == 1 ? 'active' : ''))
-					i.icon-circle
+					i.fa.fa-circle
 					| On
 				button.btn.btn-inverse.btn-lg.socket(type="button", data-socket="arduino-itrcswitch", data-value="0", data-id="#{item._id}", class=(item.value == 0 ? 'active' : '')) 
-					i.icon-circle-blank
+					i.fa.fa-circle-o
 					| Off
 		- if (item.method == 'sensor')
 			p.description
 				strong #{item.description}&nbsp; 
 				span.text-muted PIN #{item.pin} 
 				- if (item.graph)
-					a.show-graph-overlay.icon-bar-chart(alt="Show Graph", data-url="/api/arduino/get?type=graph&sensor=" + item._id)
+					a.show-graph-overlay.fa.fa-bar-chart-o(alt="Show Graph", data-url="/api/arduino/get?type=graph&sensor=" + item._id)
 			div.large
 				p
 					span.value(data-id="#{item._id}") #{item.value}
@@ -46,8 +46,8 @@ each item in items
 				strong #{item.description} 
 			div.btn-group(data-led="buttons-radio")
 				button.btn.btn-default.btn-lg.socket(type="button", data-socket="arduino-led", data-value="1", data-id="#{item._id}", class=(item.value == 1 ? 'active' : ''))
-					i.icon-circle
+					i.fa.fa-circle
 					| On
 				button.btn.btn-inverse.btn-lg.socket(type="button", data-socket="arduino-led", data-value="0", data-id="#{item._id}", class=(item.value == 0 ? 'active' : '')) 
-					i.icon-circle-blank
+					i.fa.fa-circle-o
 					| Off

@@ -14,11 +14,14 @@
   content: "Arduino LED";
 }
 
-.plugin-container.arduino .btn.active .icon-circle-blank:before {
+.plugin-container.arduino .btn.active .fa.fa-circle-o:before {
 	color: #FF0000;
 }
 
-.plugin-container.arduino .btn.active .icon-circle:before {
+.plugin-container.arduino .btn.active .fa.fa-circle:before {
 	color: #00FF00;
 }
+
+.plugin-container.arduino.irreceiver {
+  display: none;
 }

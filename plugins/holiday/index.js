@@ -7,7 +7,7 @@ define(['duino', 'cron', 'suncalc'], function(duino, cron, suncalc) {
 
 		this.name = 'Holiday';
 		this.collection = 'Holiday';
-		this.icon = 'icon-plane';
+		this.icon = 'fa fa-plane';
 		this.excludeFromHomeListing = true;
 
 		this.activeActorIds = {};

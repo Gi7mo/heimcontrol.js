@@ -153,7 +153,7 @@ require(["jquery", "bootstrap.min", "/socket.io/socket.io.js"], function() {
 
     function show_graph_overlay(url) {
         if ( !$graph_overlay_wrapper ) append_graph_overlay();
-        $graph_overlay_panel.html('<p class="icon-spinner icon-spin"></p>');
+        $graph_overlay_panel.html('<p class="fa fa-spinner fa-spin"></p>');
         $graph_overlay_wrapper.fadeIn(700);
         create_overlay_graph(url);
     }

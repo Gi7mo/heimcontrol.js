@@ -23,44 +23,44 @@ html
 					- if ((typeof(hide_menubar) == 'undefined') || (hide_menubar == false))
 						button.navbar-toggle(type="button", data-toggle="collapse", data-target="#mainmenu")
 							span.sr-only Toggle navigation
-							span.icon-bar
-							span.icon-bar
-							span.icon-bar
+							span.fa.fa-bar
+							span.fa.fa-bar
+							span.fa.fa-bar
 					a.navbar-brand(href="/") heimcontrol.js
 				- if ((typeof(hide_menubar) == 'undefined'))
 					div.collapse.navbar-collapse(id="mainmenu")
 						ul.nav.navbar-nav
 							li(class=(title === 'Home' ? 'active' : ''))
 								a(href="/")
-									i.icon-home
+									i.fa.fa-home
 									| &nbsp;Home
 							li(class=(title === 'AlarmSystem' ? 'active' : ''))
 								a(href="/alarmsystem")
-									i.icon-key
+									i.fa.fa-key
 									| &nbsp;AlarmSystem
 							li.dropdown(class=(title === 'RPi-Monitor' ? 'active' : ''))
 								a.dropdown-toggle(href="#", data-toggle="dropdown")
-									i.icon-desktop
+									i.fa.fa-desktop
 									| &nbsp;RPi-Monitor&nbsp;
 									b.caret
 								ul.dropdown-menu
 									li
 										a(href="/rpi-monitor?type=status")
-											i.icon-ok &nbsp;
+											i.fa.fa-check &nbsp;
 											| Status
 										li
 											a(href="/rpi-monitor?type=statistics")
-												i.icon-bar-chart &nbsp;
+												i.fa.fa-bar-chart-o &nbsp;
 												| Statistics
 							li.dropdown(class=(title.indexOf('Settings')!==-1 ? 'active' : ''))
 								a.dropdown-toggle(href="#", data-toggle="dropdown")
-									i.icon-cogs
+									i.fa.fa-cogs
 									| &nbsp;Settings&nbsp;
 									b.caret
 								ul.dropdown-menu
 									li
 										a(href="/settings")
-											i.icon-cog &nbsp;
+											i.fa.fa-cog &nbsp;
 											| heimcontrol.js
 									li.divider
 									each plugin in plugins
@@ -72,7 +72,7 @@ html
 						ul.nav.navbar-nav.navbar-right
 							li
 								a(href="/logout") 
-									i.icon-signout &nbsp;
+									i.fa.fa-sign-out &nbsp;
 									| Logout
 
 		block content

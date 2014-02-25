@@ -16,7 +16,7 @@ define([ 'duino' ], function(duino) {
     this.name = 'Arduino';
     this.collection = 'Arduino';
     this.dataCollection = 'sensor_data';
-    this.icon = 'icon-external-link';
+    this.icon = 'fa fa-external-link';
 
     this.app = app;
     this.id = this.name.toLowerCase();

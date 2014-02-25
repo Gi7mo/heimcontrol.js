@@ -16,7 +16,7 @@ define([ 'ping', 'wake_on_lan' ], function(ping, wol) {
     this.name = 'Wake-on-LAN';
     this.id = 'wakeonlan';
     this.collection = 'Wakeonlan';
-    this.icon = 'icon-off';
+    this.icon = 'fa fa-power-off';
 
     this.app = app;
     this.pluginHelper = app.get('plugin helper');

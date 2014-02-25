@@ -14,7 +14,7 @@ div.container
 				each item, i in items
 					div.plugin-container.arduino.settings(id="#{item._id}")
 						button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
-							i.icon-trash.icon-large
+							i.fa.fa-large.fa-trash-o
 							|  Delete
 						div.row
 							div.col-md-6
@@ -95,18 +95,18 @@ div.container
 					
 			p.arduino.buttons
 				button.btn.btn-info.add(data-target="arduino", type="button", data-callback="registerSelectSwitch()") 
-					i.icon-plus.icon-large
+					i.fa.fa-large.fa-plus-circle
 					|  Add
 			
 				button.btn.btn-success.save(type="submit") 
-					i.icon-save.icon-large
+					i.fa.fa-large.fa-floppy-o
 					|  Save
 					
 input(type="hidden", name="iterator", id="iterator", value=(items.length))
 
 div.plugin-container.arduino.settings#template(style="display: none;")
 	button.btn.btn-danger.pull-right.delete(type="button")
-		i.icon-trash.icon-large
+		i.fa.fa-large.fa-trash-o
 		|  Delete
 	div.row
 		div.col-md-6

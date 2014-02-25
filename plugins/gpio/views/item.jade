@@ -12,16 +12,16 @@ each item in items
 		-if (item.direction == 'input') 
 			div
 				span.label.label-success.label-large.gpiostatus(data-id="#{item._id}", data-value="1", class=(item.value == '0' ? 'hide' : ''))
-					i.icon-circle
+					i.fa.fa-circle
 					| Up
 				span.label.label-danger.label-large.gpiostatus(data-id="#{item._id}", data-value="0", class=(item.value == '1' ? 'hide' : ''))
-					i.icon-circle-blank
+					i.fa.fa-circle-o
 					| Down
 		- else
 			div.btn-group(data-toggle="buttons-radio")
 				button.btn.btn-default.btn-lg.socket(type="button", data-socket="gpio-toggle", data-id="#{item._id}", data-value="1", class=(item.value == '1' ? 'active' : ''))
-					i.icon-circle
+					i.fa.fa-circle
 					| On
 				button.btn.btn-inverse.btn-lg.socket(type="button", data-socket="gpio-toggle", data-id="#{item._id}", data-value="0", class=(item.value == '0' ? 'active' : ''))
-					i.icon-circle-blank
+					i.fa.fa-circle-o
 					| Off

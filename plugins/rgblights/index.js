@@ -16,7 +16,7 @@ define([ 'duino' ], function(duino) {
 
     this.name = 'RGBLights';
     this.collection = 'RGBLight';
-    this.icon = 'icon-eye-open';
+    this.icon = 'fa fa-eye';
 
     this.app = app;
     this.id = this.name.toLowerCase();

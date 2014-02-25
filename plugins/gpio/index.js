@@ -15,7 +15,7 @@ define([ 'pi-gpio' ], function(gpio) {
 
     this.name = 'GPIO';
     this.collection = 'Gpio';
-    this.icon = 'icon-lightbulb';
+    this.icon = 'fa fa-lightbulb-o';
 
     this.app = app;
     this.id = this.name.toLowerCase();

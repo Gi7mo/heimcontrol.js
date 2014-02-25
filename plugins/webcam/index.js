@@ -15,7 +15,7 @@ define([ 'child_process', 'delivery', 'fs', 'http' ], function( ChildProcess, De
     this.name = 'Webcam';
     this.id = 'webcam';
     this.collection = 'Webcam';
-    this.icon = 'icon-play-circle';
+    this.icon = 'fa fa-play-circle';
 
     this.app = app;
     this.pluginHelper = app.get('plugin helper');

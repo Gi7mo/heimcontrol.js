@@ -6,7 +6,7 @@ define(['http'], function(http) {
 	var RPiMonitor = function(app) {
 		this.name = 'RPi-Monitor';
 		this.collection = 'RPiMonitor';
-		this.icon = 'icon-desktop';
+		this.icon = 'fa fa-desktop';
 		this.excludeFromHomeListing = true;
 
 		this.app = app;
