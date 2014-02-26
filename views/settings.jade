@@ -19,6 +19,7 @@ block content
 							option(value="default", selected=(theme=="/css/bootstrap.css")) bootstrap.css
 							each t in themes
 								option(value="#{t}", selected=(theme=="/css/themes/" + t)) #{t}
+					p
 					input.btn.btn-success(type="submit", value="Select Theme")
 						
 			div.col-md-5
@@ -33,6 +34,7 @@ block content
 					span.form-group
 						label(for="repeatnewpassword") Repeat new Password:
 						input.form-control#repeatnewpassword(type="password", name="repeatnewpassword", required="1")
+					p
 					input.btn.btn-success(type="submit", value="Change")
 
 		div.row
@@ -59,4 +61,5 @@ block content
 					span.form-group
 						label(for="password") Password:
 						input.form-control(type="password", name="password", required="1")
+					p
 					input.btn.btn-success(type="submit", value="Create")

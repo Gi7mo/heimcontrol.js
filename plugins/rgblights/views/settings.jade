@@ -1,47 +1,46 @@
-div.container
-	ol.breadcrumb
-		li Settings
-		li RGB Lights
-	p Setup:&nbsp;
-		a(href="http://ni-c.github.com/heimcontrol.js/plugins/rgblights.html") http://ni-c.github.com/heimcontrol.js/plugins/rgblights.html
-	- if (typeof(success) !== 'undefined')
-		div.alert.alert-success.fade.in
-			button.close(type="button", data-dismiss="alert") ×
-			=success
-	div.col-md-16
-		form(action="/settings/rgblights", method="post")
-			div#rgblights
-				each item, i in items
-					div.plugin-container.rgblights.settings(id="#{item._id}")
-						button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
-							i.fa.fa-large.fa-trash-o
-							|  Delete
-						div.row
-							div.col-md-6
-								span.form-group
-									label(for="description") Description (optional):
-									input.form-control(type="text", name="data[#{i}][description]", value="#{item.description}")
-								span.form-group
-									label(for="pin") Arduino PINs:
-										div.row.input-group
-											div.col-xs-2
-												input.form-control.rgb.uppercase(type="text", name="data[#{i}][pins][R]", placeholder="R", maxlength="2", required="1", value="#{item.pins.R}", pattern="^A[0-9]|[0-9]{1,2}$")
-											div.col-xs-2
-												input.form-control.rgb.uppercase(type="text", name="data[#{i}][pins][G]", placeholder="G", maxlength="2", required="1", value="#{item.pins.G}", pattern="^A[0-9]|[0-9]{1,2}$")
-											div.col-xs-2
-												input.form-control.rgb.uppercase(type="text", name="data[#{i}][pins][B]", placeholder="B", maxlength="2", required="1", value="#{item.pins.B}", pattern="^A[0-9]|[0-9]{1,2}$")
-									
-								input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
-								input(type="hidden", name="data[#{i}][status]", value="#{item.status}")
-					
-			p.rgblights.buttons
-				button.btn.btn-info.add(data-target="rgblights", type="button") 
-					i.fa.fa-large.fa-plus-circle
-					|  Add
-			
-				button.btn.btn-success.save(type="submit") 
-					i.fa.fa-large.fa-floppy-o
-					|  Save
+ol.breadcrumb
+	li Settings
+	li RGB Lights
+p Setup:&nbsp;
+	a(href="http://ni-c.github.com/heimcontrol.js/plugins/rgblights.html") http://ni-c.github.com/heimcontrol.js/plugins/rgblights.html
+- if (typeof(success) !== 'undefined')
+	div.alert.alert-success.fade.in
+		button.close(type="button", data-dismiss="alert") ×
+		=success
+div.col-md-12
+	form(action="/settings/rgblights", method="post")
+		div#rgblights
+			each item, i in items
+				div.plugin-container.rgblights.settings(id="#{item._id}")
+					button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
+						i.fa.fa-large.fa-trash-o
+						|  Delete
+					div.row
+						div.col-md-6
+							span.form-group
+								label(for="description") Description (optional):
+								input.form-control(type="text", name="data[#{i}][description]", value="#{item.description}")
+							span.form-group
+								label(for="pin") Arduino PINs:
+									div.row.input-group
+										div.col-xs-2
+											input.form-control.rgb.uppercase(type="text", name="data[#{i}][pins][R]", placeholder="R", maxlength="2", required="1", value="#{item.pins.R}", pattern="^A[0-9]|[0-9]{1,2}$")
+										div.col-xs-2
+											input.form-control.rgb.uppercase(type="text", name="data[#{i}][pins][G]", placeholder="G", maxlength="2", required="1", value="#{item.pins.G}", pattern="^A[0-9]|[0-9]{1,2}$")
+										div.col-xs-2
+											input.form-control.rgb.uppercase(type="text", name="data[#{i}][pins][B]", placeholder="B", maxlength="2", required="1", value="#{item.pins.B}", pattern="^A[0-9]|[0-9]{1,2}$")
+								
+							input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
+							input(type="hidden", name="data[#{i}][status]", value="#{item.status}")
+				
+		p.rgblights.buttons
+			button.btn.btn-info.add(data-target="rgblights", type="button") 
+				i.fa.fa-large.fa-plus-circle
+				|  Add
+		
+			button.btn.btn-success.save(type="submit") 
+				i.fa.fa-large.fa-floppy-o
+				|  Save
 					
 input(type="hidden", name="iterator", id="iterator", value=(items.length))
 

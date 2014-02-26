@@ -3,8 +3,8 @@ html
 	head
 		title heimcontrol.js | #{title}
 		link(rel='stylesheet', href='/css/bootstrap.min.css')
-		link(rel='stylesheet', href='#{theme}')
 		link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+		link(rel='stylesheet', href='#{theme}')
 		link(rel='stylesheet', href='/css/font-awesome.min.css')
 		link(rel='stylesheet', href='/css/heimcontrol.css')
 		link(rel='stylesheet', href='/css/plugins.css')
@@ -21,11 +21,11 @@ html
 			div.container
 				div.navbar-header
 					- if ((typeof(hide_menubar) == 'undefined') || (hide_menubar == false))
-						button.navbar-toggle(type="button", data-toggle="collapse", data-target="#mainmenu")
+						span.navbar-toggle(type="button", data-toggle="collapse", data-target="#mainmenu", style="color:gray;")
 							span.sr-only Toggle navigation
-							span.fa.fa-bar
-							span.fa.fa-bar
-							span.fa.fa-bar
+							span.icon-bar
+							span.icon-bar
+							span.icon-bar
 					a.navbar-brand(href="/") heimcontrol.js
 				- if ((typeof(hide_menubar) == 'undefined'))
 					div.collapse.navbar-collapse(id="mainmenu")
@@ -46,11 +46,11 @@ html
 								ul.dropdown-menu
 									li
 										a(href="/rpi-monitor?type=status")
-											i.fa.fa-check &nbsp;
+											i.fa.fa-check.dropdownicon &nbsp;
 											| Status
 										li
 											a(href="/rpi-monitor?type=statistics")
-												i.fa.fa-bar-chart-o &nbsp;
+												i.fa.fa-bar-chart-o.dropdownicon &nbsp;
 												| Statistics
 							li.dropdown(class=(title.indexOf('Settings')!==-1 ? 'active' : ''))
 								a.dropdown-toggle(href="#", data-toggle="dropdown")
@@ -60,14 +60,14 @@ html
 								ul.dropdown-menu
 									li
 										a(href="/settings")
-											i.fa.fa-cog &nbsp;
+											i.fa.fa-cog.dropdownicon &nbsp;
 											| heimcontrol.js
 									li.divider
 									each plugin in plugins
 										li
 											a(href="/settings/#{plugin.id}") 
 												- if (plugin.icon)
-													i(class="#{plugin.icon}") &nbsp;
+													i(class="dropdownicon #{plugin.icon}") &nbsp;
 												| &nbsp;#{plugin.name}
 						ul.nav.navbar-nav.navbar-right
 							li

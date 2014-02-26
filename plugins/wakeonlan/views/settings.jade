@@ -1,40 +1,39 @@
-div.container
-	ol.breadcrumb
-		li Settings
-		li Wake-on-LAN
-	- if (typeof(success) !== 'undefined')
-		div.alert.alert-success.fade.in
-			button.close(type="button", data-dismiss="alert") ×
-			=success
-	div.col-md-16
-		form(action="/settings/wakeonlan", method="post", role="form")
-			div#wakeonlan
-				each item, i in items
-					div.plugin-container.wakeonlan(id="#{item._id}", style=(item.mac == '' ? 'display: none;' : ''))
-						button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
-							i.fa.fa-large.fa-trash-o
-							|  Delete
-						div.row
-							div.col-md-6
-								span.form-group
-									label(for="description") Description (optional):
-									input.form-control(type="text", name="data[#{i}][description]", placeholder="iMac", value=(typeof(item.description) == 'undefined' ? '' : item.description))
-								span.form-group
-									label(for="host") Hostname / IP:
-									input.form-control(type="text", name="data[#{i}][host]", placeholder="hostname", required="1", value="#{item.host}")
-								span.form-group
-									label(for="mac") MAC-Address:
-									input.form-control.uppercase(type="text", name="data[#{i}][mac]", placeholder="12:34:56:78:90:AB", required="1", pattern="^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$", value="#{item.mac}", maxlength="17")
-									input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
-					
-			p.wakeonlan.buttons
-				button.btn.btn-info.add(data-target="wakeonlan", type="button") 
-					i.fa.fa-large.fa-plus-circle
-					|  Add
-			
-				button.btn.btn-success.save(type="submit") 
-					i.fa.fa-large.fa-floppy-o
-					|  Save
+ol.breadcrumb
+	li Settings
+	li Wake-on-LAN
+- if (typeof(success) !== 'undefined')
+	div.alert.alert-success.fade.in
+		button.close(type="button", data-dismiss="alert") ×
+		=success
+div.col-md-12
+	form(action="/settings/wakeonlan", method="post", role="form")
+		div#wakeonlan
+			each item, i in items
+				div.plugin-container.wakeonlan(id="#{item._id}", style=(item.mac == '' ? 'display: none;' : ''))
+					button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
+						i.fa.fa-large.fa-trash-o
+						|  Delete
+					div.row
+						div.col-md-6
+							span.form-group
+								label(for="description") Description (optional):
+								input.form-control(type="text", name="data[#{i}][description]", placeholder="iMac", value=(typeof(item.description) == 'undefined' ? '' : item.description))
+							span.form-group
+								label(for="host") Hostname / IP:
+								input.form-control(type="text", name="data[#{i}][host]", placeholder="hostname", required="1", value="#{item.host}")
+							span.form-group
+								label(for="mac") MAC-Address:
+								input.form-control.uppercase(type="text", name="data[#{i}][mac]", placeholder="12:34:56:78:90:AB", required="1", pattern="^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$", value="#{item.mac}", maxlength="17")
+								input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
+				
+		p.wakeonlan.buttons
+			button.btn.btn-info.add(data-target="wakeonlan", type="button") 
+				i.fa.fa-large.fa-plus-circle
+				|  Add
+		
+			button.btn.btn-success.save(type="submit") 
+				i.fa.fa-large.fa-floppy-o
+				|  Save
 			
 input(type="hidden", name="iterator", id="iterator", value=(items.length))
 			

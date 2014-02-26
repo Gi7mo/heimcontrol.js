@@ -1,106 +1,106 @@
-div.container
-	ol.breadcrumb
-		li Settings
-		li Arduino
-	p Example Wirings:&nbsp;
-		a(href="http://ni-c.github.com/heimcontrol.js/plugins/arduino.html") http://ni-c.github.com/heimcontrol.js/plugins/arduino.html
-	- if (typeof(success) !== 'undefined')
-		div.alert.alert-success.fade.in
-			button.close(type="button", data-dismiss="alert") ×
-			=success
-	div.col-md-16
-		form(action="/settings/arduino", method="post")
-			div#arduino
-				each item, i in items
-					div.plugin-container.arduino.settings(id="#{item._id}")
-						button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
-							i.fa.fa-large.fa-trash-o
-							|  Delete
-						div.row
-							div.col-md-6
-								span.form-group
-									label(for="description") Description (optional):
-									input.form-control(type="text", name="data[#{i}][description]", placeholder="Temperature", value="#{item.description}")
-								span.form-group
-									label(for="pin") Arduino PIN:
-									input.form-control.uppercase(type="text", name="data[#{i}][pin]", placeholder="10", maxlength="2", required="1", value="#{item.pin}", pattern="^A[0-9]|[0-9]{1,2}$")
-								div.switch
-									span.form-group
-										label(for="method") Method:
-										select.form-control(name="data[#{i}][method]")
-											option(disabled="disabled",selected=(item.method == '')) Choose Method
-											option(value="rcswitch",selected=(item.method == 'rcswitch')) rc-switch
-											option(value="itrcswitch",selected=(item.method == 'itrcswitch')) intertechno
-											option(value="sensor",selected=(item.method == 'sensor')) sensor
-											option(value="irremote",selected=(item.method == 'irremote')) ir-remote
-											option(value="irreceiver",selected=(item.method == 'irreceiver')) ir-receiver
-											option(value="led",selected=(item.method == 'led')) led
-									div.switch-container
-										div.rcswitch(class=(item.method != 'rcswitch' ? 'hidden' : ''))
-											span.form-group
-												label(for="code") Tristate-Code:
-												input.form-control.uppercase(type="text", name="data[#{i}][code]", placeholder="FF0F0FFF", data-required="1", maxlength="8", value=(item.code ? item.code : ''), pattern="^[A-Fa-f0-9]{8}$")
 
-										div.rcswitch(class=(item.method != 'itrcswitch' ? 'hidden' : ''))
-											span.form-group
-												label(for="housecode") House-Code (A-P):
-												input.form-control.uppercase(type="text", name="data[#{i}][housecode]", maxlength="1", placeholder="A", data-required="1", value=(item.housecode ? item.housecode : ''), pattern="^[A-P]{1}$")
-											span.form-group
-												label(for="devicecode") Device-Code (1-16):
-												input.form-control.uppercase(type="text", name="data[#{i}][devicecode]", maxlength="1", placeholder="1", data-required="1", value=(item.devicecode ? item.devicecode : ''), pattern="^[0-9]{1,2}$")
-											span.form-group
-												label(for="led") Status-Led-Pin (optional):
-												input.form-control.uppercase(type="text", name="data[#{i}][led]", placeholder="11", maxlength="2", data-required="0", value=(item.led ? item.led : ''), pattern="^[0-9]{2}$")
-											span.form-group
-												label(for="ircodeon") IrCodeOn (optional):
-												input.form-control.uppercase(type="text", name="data[#{i}][ircodeOn]", placeholder="2FD807F", maxlength="8", data-required="0", value=(item.ircodeOn ? item.ircodeOn : ''), pattern="^[0-9A-F]{7,8}$")
-											span.form-group
-												label(for="ircodeoff") IrCodeOff (optional):
-												input.form-control.uppercase(type="text", name="data[#{i}][ircodeOff]", placeholder="2FD40BF", maxlength="8", data-required="0", value=(item.ircodeOff ? item.ircodeOff : ''), pattern="^[0-9A-F]{7,8}$")
-									
-										div.sensor(class=(item.method != 'sensor' ? 'hidden' : ''))
-											span.form-group
-												label(for="formula") Formula
-												input.form-control(type="text", name="data[#{i}][formula]", placeholder="x*100-3.14", data-required="1", value=(item.formula ? item.formula : ''))
-											span.form-group
-												label(for="unit") Unit (optional):
-												input.form-control(type="text", name="data[#{i}][unit]", placeholder="°F", data-required="0", value=(item.unit ? item.unit : ''))
-											span.checkbox
-												label
-													input(type="checkbox", checked=item.graph, name="data[#{i}][graph]",  data-required="0")
-													| Draw Graph:
-					
-										div.irremote(class=(item.method != 'irremote' ? 'hidden' : ''))
-											span.form-group
-												label(for="irtype") IR Type:
-												select.form-control(name="data[#{i}][irtype]")
-													option(disabled="disabled",selected=(item.irtype == '')) Choose Type
-													option(value="1",selected=(item.irtype == '1')) RC5
-													option(value="2",selected=(item.irtype == '2')) RC6
-													option(value="3",selected=(item.irtype == '3')) NEC
-													option(value="4",selected=(item.irtype == '4')) Sony
-													option(value="5",selected=(item.irtype == '5')) DISH
-													option(value="6",selected=(item.irtype == '6')) Sharp
-													option(value="7",selected=(item.irtype == '7')) Panasonic
-													option(value="8",selected=(item.irtype == '8')) JVC
-											span.form-group
-												label(for="ircode") Code:
-												input.form-control.uppercase(type="text", name="data[#{i}][ircode]", placeholder="F0F2A3A2", data-required="1", value=(item.ircode ? item.ircode : ''), pattern="^[A-F0-9]*$")
-											span.form-group
-												label(for="addr") Length:
-												input.form-control(type="text", name="data[#{i}][irlength]", placeholder="48", data-required="1", value=(item.irlength ? item.irlength : ''))
+ol.breadcrumb
+	li Settings
+	li Arduino
+p Example Wirings:&nbsp;
+	a(href="http://ni-c.github.com/heimcontrol.js/plugins/arduino.html") http://ni-c.github.com/heimcontrol.js/plugins/arduino.html
+- if (typeof(success) !== 'undefined')
+	div.alert.alert-success.fade.in
+		button.close(type="button", data-dismiss="alert") ×
+		=success
+div.col-md-12
+	form(action="/settings/arduino", method="post")
+		div#arduino
+			each item, i in items
+				div.plugin-container.arduino.settings(id="#{item._id}")
+					button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
+						i.fa.fa-large.fa-trash-o
+						|  Delete
+					div.row
+						div.col-md-6
+							span.form-group
+								label(for="description") Description (optional):
+								input.form-control(type="text", name="data[#{i}][description]", placeholder="Temperature", value="#{item.description}")
+							span.form-group
+								label(for="pin") Arduino PIN:
+								input.form-control.uppercase(type="text", name="data[#{i}][pin]", placeholder="10", maxlength="2", required="1", value="#{item.pin}", pattern="^A[0-9]|[0-9]{1,2}$")
+							div.switch
+								span.form-group
+									label(for="method") Method:
+									select.form-control(name="data[#{i}][method]")
+										option(disabled="disabled",selected=(item.method == '')) Choose Method
+										option(value="rcswitch",selected=(item.method == 'rcswitch')) rc-switch
+										option(value="itrcswitch",selected=(item.method == 'itrcswitch')) intertechno
+										option(value="sensor",selected=(item.method == 'sensor')) sensor
+										option(value="irremote",selected=(item.method == 'irremote')) ir-remote
+										option(value="irreceiver",selected=(item.method == 'irreceiver')) ir-receiver
+										option(value="led",selected=(item.method == 'led')) led
+								div.switch-container
+									div.rcswitch(class=(item.method != 'rcswitch' ? 'hidden' : ''))
+										span.form-group
+											label(for="code") Tristate-Code:
+											input.form-control.uppercase(type="text", name="data[#{i}][code]", placeholder="FF0F0FFF", data-required="1", maxlength="8", value=(item.code ? item.code : ''), pattern="^[A-Fa-f0-9]{8}$")
 
-								input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
-								input(type="hidden", name="data[#{i}][status]", value="#{item.status}")
-					
-			p.arduino.buttons
-				button.btn.btn-info.add(data-target="arduino", type="button", data-callback="registerSelectSwitch()") 
-					i.fa.fa-large.fa-plus-circle
-					|  Add
-			
-				button.btn.btn-success.save(type="submit") 
-					i.fa.fa-large.fa-floppy-o
-					|  Save
+									div.rcswitch(class=(item.method != 'itrcswitch' ? 'hidden' : ''))
+										span.form-group
+											label(for="housecode") House-Code (A-P):
+											input.form-control.uppercase(type="text", name="data[#{i}][housecode]", maxlength="1", placeholder="A", data-required="1", value=(item.housecode ? item.housecode : ''), pattern="^[A-P]{1}$")
+										span.form-group
+											label(for="devicecode") Device-Code (1-16):
+											input.form-control.uppercase(type="text", name="data[#{i}][devicecode]", maxlength="1", placeholder="1", data-required="1", value=(item.devicecode ? item.devicecode : ''), pattern="^[0-9]{1,2}$")
+										span.form-group
+											label(for="led") Status-Led-Pin (optional):
+											input.form-control.uppercase(type="text", name="data[#{i}][led]", placeholder="11", maxlength="2", data-required="0", value=(item.led ? item.led : ''), pattern="^[0-9]{2}$")
+										span.form-group
+											label(for="ircodeon") IrCodeOn (optional):
+											input.form-control.uppercase(type="text", name="data[#{i}][ircodeOn]", placeholder="2FD807F", maxlength="8", data-required="0", value=(item.ircodeOn ? item.ircodeOn : ''), pattern="^[0-9A-F]{7,8}$")
+										span.form-group
+											label(for="ircodeoff") IrCodeOff (optional):
+											input.form-control.uppercase(type="text", name="data[#{i}][ircodeOff]", placeholder="2FD40BF", maxlength="8", data-required="0", value=(item.ircodeOff ? item.ircodeOff : ''), pattern="^[0-9A-F]{7,8}$")
+								
+									div.sensor(class=(item.method != 'sensor' ? 'hidden' : ''))
+										span.form-group
+											label(for="formula") Formula
+											input.form-control(type="text", name="data[#{i}][formula]", placeholder="x*100-3.14", data-required="1", value=(item.formula ? item.formula : ''))
+										span.form-group
+											label(for="unit") Unit (optional):
+											input.form-control(type="text", name="data[#{i}][unit]", placeholder="°F", data-required="0", value=(item.unit ? item.unit : ''))
+										span.checkbox
+											label
+												input(type="checkbox", checked=item.graph, name="data[#{i}][graph]",  data-required="0")
+												| Draw Graph:
+				
+									div.irremote(class=(item.method != 'irremote' ? 'hidden' : ''))
+										span.form-group
+											label(for="irtype") IR Type:
+											select.form-control(name="data[#{i}][irtype]")
+												option(disabled="disabled",selected=(item.irtype == '')) Choose Type
+												option(value="1",selected=(item.irtype == '1')) RC5
+												option(value="2",selected=(item.irtype == '2')) RC6
+												option(value="3",selected=(item.irtype == '3')) NEC
+												option(value="4",selected=(item.irtype == '4')) Sony
+												option(value="5",selected=(item.irtype == '5')) DISH
+												option(value="6",selected=(item.irtype == '6')) Sharp
+												option(value="7",selected=(item.irtype == '7')) Panasonic
+												option(value="8",selected=(item.irtype == '8')) JVC
+										span.form-group
+											label(for="ircode") Code:
+											input.form-control.uppercase(type="text", name="data[#{i}][ircode]", placeholder="F0F2A3A2", data-required="1", value=(item.ircode ? item.ircode : ''), pattern="^[A-F0-9]*$")
+										span.form-group
+											label(for="addr") Length:
+											input.form-control(type="text", name="data[#{i}][irlength]", placeholder="48", data-required="1", value=(item.irlength ? item.irlength : ''))
+
+							input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
+							input(type="hidden", name="data[#{i}][status]", value="#{item.status}")
+				
+		p.arduino.buttons
+			button.btn.btn-info.add(data-target="arduino", type="button", data-callback="registerSelectSwitch()") 
+				i.fa.fa-large.fa-plus-circle
+				|  Add
+		
+			button.btn.btn-success.save(type="submit") 
+				i.fa.fa-large.fa-floppy-o
+				|  Save
 					
 input(type="hidden", name="iterator", id="iterator", value=(items.length))
 

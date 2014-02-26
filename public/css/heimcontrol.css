@@ -2,10 +2,8 @@
   max-width: 979px;
 }
 
-@media (min-width: 979px) {
-  body {
-    padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-  }
+body {
+    padding-top: 70px; /* 60px to make the container go all the way to the bottom of the topbar */
 }
 
 @media (min-width: 450px) {
@@ -91,6 +89,10 @@ input.login {
 .large p {
   font-size: 36px;
   font-weight: bold;
+}
+
+i.dropdownicon {
+  width: 20px;
 }
 
 a.show-graph-overlay {

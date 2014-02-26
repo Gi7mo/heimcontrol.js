@@ -22,10 +22,9 @@ require(['jquery'], function() {
 	function RowTemplate(id,image,title) {
 		return ""+
 			"<div class='row'>"+
-			  "<div class='col-md-1'><div class='Icon'><img src='"+image+"' alt='"+title+"'></div></div>"+
-			  "<div class='col-md-2'><div class='Title'>"+title+"</div>"+
-			  "<div class='Warning'></div></div>"+
-			  "<div class='col-md-9'><div class='Text' id='Text"+id+"'><b></b></div></div>"+
+			  "<div class='col-md-1'><img src='"+image+"' alt='"+title+"'></div>"+
+			  "<div class='col-md-2'><h4>"+title+""+"</h2><div class='Warning'></div></div>"+
+			  "<div class='col-md-5' id='Text"+id+"'><b></b></div>"+
 			"</div>"+
 			"<hr>";
 	}

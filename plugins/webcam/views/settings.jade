@@ -1,63 +1,62 @@
-div.container
-	ol.breadcrumb
-		li Settings
-		li Webcam
-	p The plugin requires&nbsp;
-		code streamer
-		| &nbsp;or&nbsp;
-		code motion 
-		| &nbsp;to capture images from your webcam. To install it, run one of the following command on your Raspberry PI console:
-	pre sudo apt-get install streamer
-	pre sudo apt-get install motion
-	p
-		code motion
-		| &nbsp;needs to be configured and running as a daemon.  
-	- if (typeof(success) !== 'undefined')
-		div.alert.alert-success.fade.in
-			button.close(type="button", data-dismiss="alert") ×
-			=success
-	div.col-md-16
-		form(action="/settings/webcam", method="post", role="form")
-			div#webcam
-				each item, i in items
-					div.plugin-container.webcam(id="#{item._id}")
-						button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
-							i.fa.fa-large.fa-trash-o
-							|  Delete
+ol.breadcrumb
+	li Settings
+	li Webcam
+p The plugin requires&nbsp;
+	code streamer
+	| &nbsp;or&nbsp;
+	code motion 
+	| &nbsp;to capture images from your webcam. To install it, run one of the following command on your Raspberry PI console:
+pre sudo apt-get install streamer
+pre sudo apt-get install motion
+p
+	code motion
+	| &nbsp;needs to be configured and running as a daemon.  
+- if (typeof(success) !== 'undefined')
+	div.alert.alert-success.fade.in
+		button.close(type="button", data-dismiss="alert") ×
+		=success
+div.col-md-12
+	form(action="/settings/webcam", method="post", role="form")
+		div#webcam
+			each item, i in items
+				div.plugin-container.webcam(id="#{item._id}")
+					button.btn.btn-danger.pull-right.delete(type="button",data-delete="#{item._id}")
+						i.fa.fa-large.fa-trash-o
+						|  Delete
 
-						div.row
-							div.col-md-6
-								div.switch
-									span.form-group
-										label(for="method") Method:
-										select.form-control(name="data[#{i}][method]")
-											option(disabled="disabled",selected=(item.method == '')) Choose Method
-											option(value="streamer",selected=(item.method == 'streamer')) streamer
-											option(value="motion",selected=(item.method == 'motion')) motion
-									div.switch-container
-										div.streamer(class=(item.method != 'streamer' ? 'hidden' : ''))
-											span.form-group
-												label(for="input") Input Device:
-												select.form-control(name="data[#{i}][input]")
-													each input in meta.devices
-														option(value="#{input}",selected=(item.input == input)) #{input}
-											span.form-group
-												label(for="interval") Interval in seconds:
-												input.form-control(type="text", name="data[#{i}][interval]", placeholder="10", required="1", value="#{item.interval}", pattern="^[0-9]*$")
-												input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
-										div.motion(class=(item.method != 'motion' ? 'hidden' : ''))
-											span.form-group
-												label(for="port") Stream Port:
-												input.form-control(type="text", name="data[#{i}][port]", placeholder="8082", required="1", value="#{item.port}")
-					
-			p.webcam.buttons
-				button.btn.btn-info.add(data-target="webcam", type="button", data-callback="registerSelectSwitch()") 
-					i.fa.fa-large.fa-plus-circle
-					|  Add
-			
-				button.btn.btn-success.save(type="submit") 
-					i.fa.fa-large.fa-floppy-o
-					|  Save
+					div.row
+						div.col-md-6
+							div.switch
+								span.form-group
+									label(for="method") Method:
+									select.form-control(name="data[#{i}][method]")
+										option(disabled="disabled",selected=(item.method == '')) Choose Method
+										option(value="streamer",selected=(item.method == 'streamer')) streamer
+										option(value="motion",selected=(item.method == 'motion')) motion
+								div.switch-container
+									div.streamer(class=(item.method != 'streamer' ? 'hidden' : ''))
+										span.form-group
+											label(for="input") Input Device:
+											select.form-control(name="data[#{i}][input]")
+												each input in meta.devices
+													option(value="#{input}",selected=(item.input == input)) #{input}
+										span.form-group
+											label(for="interval") Interval in seconds:
+											input.form-control(type="text", name="data[#{i}][interval]", placeholder="10", required="1", value="#{item.interval}", pattern="^[0-9]*$")
+											input(type="hidden", name="data[#{i}][_id]", value="#{item._id}")
+									div.motion(class=(item.method != 'motion' ? 'hidden' : ''))
+										span.form-group
+											label(for="port") Stream Port:
+											input.form-control(type="text", name="data[#{i}][port]", placeholder="8082", required="1", value="#{item.port}")
+				
+		p.webcam.buttons
+			button.btn.btn-info.add(data-target="webcam", type="button", data-callback="registerSelectSwitch()") 
+				i.fa.fa-large.fa-plus-circle
+				|  Add
+		
+			button.btn.btn-success.save(type="submit") 
+				i.fa.fa-large.fa-floppy-o
+				|  Save
 			
 input(type="hidden", name="iterator", id="iterator", value=(items.length))
 			
